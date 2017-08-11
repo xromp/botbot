@@ -191,7 +191,7 @@ function receivedPostback(event) {
   	gmail:"bryan@google.com"
   };
   
-  // sendTextMessage(senderID, createEmplyee(person));
+  sendTextMessage(senderID, "createEmplyee(person)");
 }
 function createEmplyee(person){
   request({
@@ -204,7 +204,6 @@ function createEmplyee(person){
       var messageId = body.message_id;
       console.log(response.body)
       console.log(body.name);
-      sendTextMessage("senderID", createEmplyee(person));
       return body.name;
     } else {
       console.error("Unable to send message.");
