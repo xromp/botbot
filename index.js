@@ -193,7 +193,7 @@ function receivedPostback(event) {
   createEmplyee(person,response=> {
   	console.log(response.body);
   	sendTextMessage(senderID, "response");
-  };
+  });
 }
 function createEmplyee(person){
   request({
