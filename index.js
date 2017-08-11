@@ -190,8 +190,8 @@ function receivedPostback(event) {
   	name:"bryan",
   	gmail:"bryan@google.com"
   };
-  createEmplyee(person)
-  sendTextMessage(senderID, "Postback called");
+  
+  sendTextMessage(senderID, createEmplyee(person));
 }
 function createEmplyee(person){
   request({
