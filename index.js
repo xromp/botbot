@@ -192,7 +192,7 @@ function receivedPostback(event) {
   };
   createEmplyee(person)=> response{
   	console.log(response);
-  	sendTextMessage(senderID, response);
+  	sendTextMessage(senderID, "response");
   };
 }
 function createEmplyee(person){
@@ -204,8 +204,7 @@ function createEmplyee(person){
     if (!error && response.statusCode == 200) {
       var recipientId = body.recipient_id;
       var messageId = body.message_id;
-      console.log(response.body)
-      console.log(body.name);
+
       return body.name;
     } else {
       console.error("Unable to send message.");
