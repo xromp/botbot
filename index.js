@@ -145,28 +145,48 @@ function sendTextMessage(recipientId, messageText) {
   let apiai = apiaiApp.textRequest(messageText, {
     sessionId: 'tabby_cat' // use any arbitrary id
   });
-
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text: messageText
-    }
-  };
-  console.log(messageData);
   apiai.on('response', (response) => {
-  	let aiText = response.result.fulfillment.speech;
-  	messageData.message = aiText;
-    // Got a response from api.ai. Let's POST to Facebook Messenger
-    // callSendAPI(messageData);
-  });
+  let aiText = response.result.fulfillment.speech;
 
-  apiai.on('error', (error) => {
-    console.log(error);
-  });
+    request({
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token: access_token},
+      method: 'POST',
+      json: {
+        recipient: {id: sender},
+        message: {text: aiText}
+      }
+    }, (error, response) => {
+      if (error) {
+          console.log('Error sending message: ', error);
+      } else if (response.body.error) {
+          console.log('Error: ', response.body.error);
+      }
+    });
+ });
+ apiai.end();
 
-  apiai.end();
+  // var messageData = {
+  //   recipient: {
+  //     id: recipientId
+  //   },
+  //   message: {
+  //     text: messageText
+  //   }
+  // };
+
+  // apiai.on('response', (response) => {
+  // 	let aiText = response.result.fulfillment.speech;
+
+  //   // Got a response from api.ai. Let's POST to Facebook Messenger
+  //   // callSendAPI(messageData);
+  // });
+
+  // apiai.on('error', (error) => {
+  //   console.log(error);
+  // });
+
+  // apiai.end();
   // console.log(messageData)
   // callSendAPI(messageData);
 }
