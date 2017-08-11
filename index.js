@@ -202,6 +202,7 @@ function createEmplyee(person){
     if (!error && response.statusCode == 200) {
       var recipientId = body.recipient_id;
       var messageId = body.message_id;
+      console.log(body);
       return body;
     } else {
       console.error("Unable to send message.");
