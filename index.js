@@ -142,6 +142,7 @@ function sendGenericMessage(recipientId) {
 }
 
 function sendTextMessage(recipientId, messageText) {
+	var sender = recipientId;
   let apiai = apiaiApp.textRequest(messageText, {
     sessionId: 'tabby_cat' // use any arbitrary id
   });
