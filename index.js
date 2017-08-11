@@ -154,12 +154,12 @@ function sendTextMessage(recipientId, messageText) {
       text: messageText
     }
   };
-
+  console.log(messageData);
   apiai.on('response', (response) => {
   	let aiText = response.result.fulfillment.speech;
   	messageData.message = aiText;
     // Got a response from api.ai. Let's POST to Facebook Messenger
-    callSendAPI(messageData);
+    // callSendAPI(messageData);
   });
 
   apiai.on('error', (error) => {
@@ -167,7 +167,7 @@ function sendTextMessage(recipientId, messageText) {
   });
 
   apiai.end();
-  console.log(messageData);
+  // console.log(messageData)
   // callSendAPI(messageData);
 }
 function callSendAPI(messageData) {
