@@ -191,7 +191,7 @@ function receivedPostback(event) {
   	gmail:"bryan@google.com"
   };
   
-  sendTextMessage(senderID, createEmplyee(person));
+  // sendTextMessage(senderID, createEmplyee(person));
 }
 function createEmplyee(person){
   request({
@@ -202,9 +202,9 @@ function createEmplyee(person){
     if (!error && response.statusCode == 200) {
       var recipientId = body.recipient_id;
       var messageId = body.message_id;
-      console.log("here's body", body);
       console.log(response.body)
       console.log(body.name);
+      sendTextMessage(senderID, body.name);
       return body.name;
     } else {
       console.error("Unable to send message.");
