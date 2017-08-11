@@ -6,6 +6,7 @@ const request = require('request')
 const http = require('http')
 const app = express()
 const access_token = "EAAB9fIH7JVYBAOdQPVxrxrpEzr0FCjA5qy43GZCyjtOUgQWlFNBZCiZAn2CGnw9C6IZBO6zU3iZB5wCbyMkDko9Rzfw9clKFDe867pPcZCl7seBWGQ2kNuyE66wMO54nkUwHBCFLgPFxnR7tENGNOZAdz1E6Fz4sPbZAkjrd2RDIAIAhQGMwAoiR";
+const apiaiApp = require('apiai')("cb9a11314db744ddb8813bef8496d059");
 app.set('port', (process.env.PORT || 5000))
 
 // Process application/x-www-form-urlencoded
@@ -141,6 +142,10 @@ function sendGenericMessage(recipientId) {
 }
 
 function sendTextMessage(recipientId, messageText) {
+  let apiai = apiaiApp.textRequest(messageText, {
+    sessionId: 'tabby_cat' // use any arbitrary id
+  });
+
   var messageData = {
     recipient: {
       id: recipientId
@@ -150,6 +155,18 @@ function sendTextMessage(recipientId, messageText) {
     }
   };
 
+  apiai.on('response', (response) => {
+  	let aiText = response.result.fulfillment.speech;
+  	messageData.message = aiText;
+    // Got a response from api.ai. Let's POST to Facebook Messenger
+    callSendAPI(messageData);
+  });
+
+  apiai.on('error', (error) => {
+    console.log(error);
+  });
+  
+  apiai.end();
   callSendAPI(messageData);
 }
 function callSendAPI(messageData) {
