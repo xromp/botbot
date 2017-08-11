@@ -148,7 +148,7 @@ function sendTextMessage(recipientId, messageText) {
   });
   apiai.on('response', (response) => {
   let aiText = response.result.fulfillment.speech;
-
+  console.log("aiText:", aiText);
     request({
       url: 'https://graph.facebook.com/v2.6/me/messages',
       qs: {access_token: access_token},
