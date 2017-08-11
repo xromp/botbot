@@ -191,9 +191,9 @@ function receivedPostback(event) {
   	gmail:"bryan@google.com"
   };
   createEmplyee(person,response=> {
-  	console.log(response);
+  	console.log(response.body);
   	sendTextMessage(senderID, "response");
-  });
+  };
 }
 function createEmplyee(person){
   request({
