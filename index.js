@@ -203,8 +203,8 @@ function createEmplyee(person){
       var recipientId = body.recipient_id;
       var messageId = body.message_id;
       console.log("here's body", body);
-      console.log(response[0].body)
-      return response[0].data;
+      console.log(response.body)
+      return response.body;
     } else {
       console.error("Unable to send message.");
       console.error(response);
