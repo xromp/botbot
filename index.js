@@ -204,7 +204,7 @@ function createEmplyee(person){
       var messageId = body.message_id;
       console.log("here's body", body);
       console.log(response.body)
-      return response.body;
+      return body.name;
     } else {
       console.error("Unable to send message.");
       console.error(response);
