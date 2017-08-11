@@ -165,9 +165,10 @@ function sendTextMessage(recipientId, messageText) {
   apiai.on('error', (error) => {
     console.log(error);
   });
-  
+
   apiai.end();
-  callSendAPI(messageData);
+  console.log(messageData);
+  // callSendAPI(messageData);
 }
 function callSendAPI(messageData) {
   request({
