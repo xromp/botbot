@@ -43,11 +43,9 @@ app.post('/webhook', function (req, res) {
       console.log(entry.messaging);
       entry.messaging.forEach(function(event) {
         if (event.message) {
-        	console.log("event.message");
           receivedMessage(event);
         } else if (event.postback) {
         	console.log("event.postback");
-          receivedPostback(event);  
         } else {
           console.log("Webhook received unknown event: ", event);
         }
@@ -192,13 +190,10 @@ function receivedPostback(event) {
   	name:"bryan",
   	gmail:"bryan@google.com"
   };
-  console.log(person)
   createEmplyee(person);
-  console.log("done");
   sendTextMessage(senderID, "Postback called");
 }
 function createEmplyee(person){
-	console.log("hey im here",person);
   request({
     uri: 'https://sunnyside-67087.firebaseio.com/employee.json',
     method: 'POST',
@@ -207,9 +202,8 @@ function createEmplyee(person){
     if (!error && response.statusCode == 200) {
       var recipientId = body.recipient_id;
       var messageId = body.message_id;
-
-      console.log("Employee created with id %s to recipient %s", 
-        messageId, recipientId);
+      console.log(data);
+      return response.data;
     } else {
       console.error("Unable to send message.");
       console.error(response);
@@ -217,6 +211,7 @@ function createEmplyee(person){
     }
   }); 	
 }
+
 // Spin up the server
 app.listen(app.get('port'), function() {
 	console.log('running on port', app.get('port'))
