@@ -3,8 +3,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
+const http = require('http')
 const app = express()
-
+const access_token = "EAAB9fIH7JVYBAOdQPVxrxrpEzr0FCjA5qy43GZCyjtOUgQWlFNBZCiZAn2CGnw9C6IZBO6zU3iZB5wCbyMkDko9Rzfw9clKFDe867pPcZCl7seBWGQ2kNuyE66wMO54nkUwHBCFLgPFxnR7tENGNOZAdz1E6Fz4sPbZAkjrd2RDIAIAhQGMwAoiR";
 app.set('port', (process.env.PORT || 5000))
 
 // Process application/x-www-form-urlencoded
@@ -39,12 +40,14 @@ app.post('/webhook', function (req, res) {
       var timeOfEvent = entry.time;
 
       // Iterate over each messaging event
+      console.log(entry.messaging);
       entry.messaging.forEach(function(event) {
         if (event.message) {
+        	console.log("event.message");
           receivedMessage(event);
         } else if (event.postback) {
-        	receivedPostback(event);
-        	console.log(event);
+        	console.log("event.postback");
+          receivedPostback(event);  
         } else {
           console.log("Webhook received unknown event: ", event);
         }
@@ -66,9 +69,8 @@ function receivedMessage(event) {
   var timeOfMessage = event.timestamp;
   var message = event.message;
 
-  console.log("Received message for user %d and page %d at %d with message:", 
-    senderID, recipientID, timeOfMessage);
-  console.log(JSON.stringify(message));
+  // console.log("Received message for user %d and page %d at %d with message:", senderID, recipientID, timeOfMessage);
+  // console.log(JSON.stringify(message));
 
   var messageId = message.mid;
 
@@ -133,6 +135,7 @@ function sendGenericMessage(recipientId) {
           }]
         }
       }
+
     }
   };  
 
@@ -154,7 +157,7 @@ function sendTextMessage(recipientId, messageText) {
 function callSendAPI(messageData) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: "EAAB9fIH7JVYBAOdQPVxrxrpEzr0FCjA5qy43GZCyjtOUgQWlFNBZCiZAn2CGnw9C6IZBO6zU3iZB5wCbyMkDko9Rzfw9clKFDe867pPcZCl7seBWGQ2kNuyE66wMO54nkUwHBCFLgPFxnR7tENGNOZAdz1E6Fz4sPbZAkjrd2RDIAIAhQGMwAoiR" },
+    qs: { access_token: access_token},
     method: 'POST',
     json: messageData
 
@@ -163,14 +166,13 @@ function callSendAPI(messageData) {
       var recipientId = body.recipient_id;
       var messageId = body.message_id;
 
-      console.log("Successfully sent generic message with id %s to recipient %s", 
-        messageId, recipientId);
+      // console.log("Successfully sent generic message with id %s to recipient %s", messageId, recipientId);
     } else {
       console.error("Unable to send message.");
       console.error(response);
       console.error(error);
     }
-  });  
+  }); 
 }
 function receivedPostback(event) {
   var senderID = event.sender.id;
@@ -181,12 +183,39 @@ function receivedPostback(event) {
   // button for Structured Messages. 
   var payload = event.postback.payload;
 
-  console.log("Received postback for user %d and page %d with payload '%s' " + 
-    "at %d", senderID, recipientID, payload, timeOfPostback);
+  // console.log("Received postback for user %d and page %d with payload '%s' " + "at %d", senderID, recipientID, payload, timeOfPostback);
+
 
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
+  var person = {
+  	name:"bryan",
+  	gmail:"bryan@google.com"
+  };
+  console.log(person)
+  createEmplyee(person);
+  console.log("done");
   sendTextMessage(senderID, "Postback called");
+}
+function createEmplyee(person){
+	console.log("hey im here",person);
+  request({
+    uri: 'https://sunnyside-67087.firebaseio.com/employee.json',
+    method: 'POST',
+    json: person
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var recipientId = body.recipient_id;
+      var messageId = body.message_id;
+
+      console.log("Employee created with id %s to recipient %s", 
+        messageId, recipientId);
+    } else {
+      console.error("Unable to send message.");
+      console.error(response);
+      console.error(error);
+    }
+  }); 	
 }
 // Spin up the server
 app.listen(app.get('port'), function() {
