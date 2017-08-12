@@ -221,6 +221,7 @@ function callSendAPI(messageData) {
   }); 
 }
 function receivedPostback(event) {
+  console.log(event.postback.payload);
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
@@ -239,7 +240,7 @@ function receivedPostback(event) {
   	gmail:"bryan@google.com"
   };
   createEmplyee(person,response=> {
-  	console.log(response.body);
+  	// console.log(response.body);
   	sendTextMessage(senderID, "response");
   });
 }
@@ -283,7 +284,7 @@ function getLeaveFiled(recipientId) {
               "subtitle": "Emergency Leave"
             },
             {
-              "title": "14-Mar-2017 Tue(Cancelled)",
+              "title": "14-Mar-2017 Tue(Canc)",
               "subtitle": "Vacant Leave"
             }
           ],
