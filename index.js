@@ -92,7 +92,7 @@ function receivedMessage(event) {
       case 'View Leave Filed':
         getLeaveFiled(senderID);
         break;
-        
+
       default:
         sendTextMessage(senderID, messageText);
     }
@@ -277,50 +277,17 @@ function getLeaveFiled(recipientId) {
             {
               "title": "Classic T-Shirt Collection",
               "subtitle": "See all our colors",
-              "image_url": "https://peterssendreceiveapp.ngrok.io/img/collection.png",          
-              "buttons": [
-                {
-                  "title": "View",
-                  "type": "web_url",
-                  "url": "https://peterssendreceiveapp.ngrok.io/collection",
-                  "messenger_extensions": true,
-                  "webview_height_ratio": "tall",
-                  "fallback_url": "https://peterssendreceiveapp.ngrok.io/"            
-                }
-              ]
+              "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhFrqVLncGOaI8Fqgf_eBg-FGqotAnD6LKZAkYyV47XwKNZn8_"
             },
             {
-              "title": "Classic White T-Shirt",
+              "title": "Classic T-Shirt Collection",
               "subtitle": "See all our colors",
-              "default_action": {
-                "type": "web_url",
-                "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
-                "messenger_extensions": true,
-                "webview_height_ratio": "tall",
-                "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-              }
+              "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhFrqVLncGOaI8Fqgf_eBg-FGqotAnD6LKZAkYyV47XwKNZn8_"
             },
             {
-              "title": "Classic Blue T-Shirt",
-              "image_url": "https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png",
-              "subtitle": "100% Cotton, 200% Comfortable",
-              "default_action": {
-                "type": "web_url",
-                "url": "https://peterssendreceiveapp.ngrok.io/view?item=101",
-                "messenger_extensions": true,
-                "webview_height_ratio": "tall",
-                "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-              },
-              "buttons": [
-                {
-                  "title": "Shop Now",
-                  "type": "web_url",
-                  "url": "https://peterssendreceiveapp.ngrok.io/shop?item=101",
-                  "messenger_extensions": true,
-                  "webview_height_ratio": "tall",
-                  "fallback_url": "https://peterssendreceiveapp.ngrok.io/"            
-                }
-              ]        
+              "title": "Classic T-Shirt Collection",
+              "subtitle": "See all our colors",
+              "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhFrqVLncGOaI8Fqgf_eBg-FGqotAnD6LKZAkYyV47XwKNZn8_"
             }
           ],
            "buttons": [
