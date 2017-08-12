@@ -85,6 +85,9 @@ function receivedMessage(event) {
         sendGenericMessage(senderID);
         break;
 
+      case 'generic':
+        sendMenu(senderID);
+        break;
       default:
         sendTextMessage(senderID, messageText);
     }
@@ -140,21 +143,70 @@ function sendGenericMessage(recipientId) {
 
   callSendAPI(messageData);
 }
+function sendMenu(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      "persistent_menu":[
+          {
+            "locale":"default",
+            "composer_input_disabled":true,
+            "call_to_actions":[
+              {
+                "title":"My Account",
+                "type":"nested",
+                "call_to_actions":[
+                  {
+                    "title":"Pay Bill",
+                    "type":"postback",
+                    "payload":"PAYBILL_PAYLOAD"
+                  },
+                  {
+                    "title":"History",
+                    "type":"postback",
+                    "payload":"HISTORY_PAYLOAD"
+                  },
+                  {
+                    "title":"Contact Info",
+                    "type":"postback",
+                    "payload":"CONTACT_INFO_PAYLOAD"
+                  }
+                ]
+              },
+              {
+                "type":"web_url",
+                "title":"Latest News",
+                "url":"http://petershats.parseapp.com/hat-news",
+                "webview_height_ratio":"full"
+              }
+            ]
+          },
+          {
+            "locale":"zh_CN",
+            "composer_input_disabled":false
+          }
+      ]
+    }
+  };  
 
+  callSendAPI(messageData);
+
+}
 function sendTextMessage(recipientId, messageText) {
-	var sender = recipientId;
   let apiai = apiaiApp.textRequest(messageText, {
     sessionId: 'tabby_cat' // use any arbitrary id
   });
+  
   apiai.on('response', (response) => {
   let aiText = response.result.fulfillment.speech;
-  console.log("aiText:", aiText);
     request({
       url: 'https://graph.facebook.com/v2.6/me/messages',
       qs: {access_token: access_token},
       method: 'POST',
       json: {
-        recipient: {id: sender},
+        recipient: {id: recipientId},
         message: {text: aiText}
       }
     }, (error, response) => {
@@ -164,8 +216,8 @@ function sendTextMessage(recipientId, messageText) {
           console.log('Error: ', response.body.error);
       }
     });
- });
- apiai.end();
+ 	});
+ 	apiai.end();
 
   // var messageData = {
   //   recipient: {
