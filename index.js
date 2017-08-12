@@ -7,6 +7,20 @@ const http = require('http')
 const app = express()
 const access_token = "EAAB9fIH7JVYBAOdQPVxrxrpEzr0FCjA5qy43GZCyjtOUgQWlFNBZCiZAn2CGnw9C6IZBO6zU3iZB5wCbyMkDko9Rzfw9clKFDe867pPcZCl7seBWGQ2kNuyE66wMO54nkUwHBCFLgPFxnR7tENGNOZAdz1E6Fz4sPbZAkjrd2RDIAIAhQGMwAoiR"
 const apiaiApp = require('apiai')("cb9a11314db744ddb8813bef8496d059");
+const firebaseAdmin = require("firebase-admin");
+
+var serviceAccount = require("path/to/serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: firebaseAdmin.credential.cert(serviceAccount),
+  databaseURL: "https://timeaway-ddb73.firebaseio.com"
+});
+var db = firebaseAdmin.database();
+var ref = db.ref("employee");
+ref.on("value", function(snapshot) {
+  console.log(snapshot.val());
+});
+
 app.set('port', (process.env.PORT || 5000))
 
 // Process application/x-www-form-urlencoded
@@ -250,8 +264,7 @@ function receivedPostback(event) {
       break;
     
     default:
-      console.log('--------------NO--------------', payload);
-    console.log(payload)
+      console.log('--------------UNDEFINED LEAVE--------------', payload);
   }
   // console.log("Received postback for user %d and page %d with payload '%s' " + "at %d", senderID, recipientID, payload, timeOfPostback);
 
