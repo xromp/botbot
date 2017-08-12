@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const http = require('http')
 const app = express()
-const access_token = "EAAB9fIH7JVYBAOdQPVxrxrpEzr0FCjA5qy43GZCyjtOUgQWlFNBZCiZAn2CGnw9C6IZBO6zU3iZB5wCbyMkDko9Rzfw9clKFDe867pPcZCl7seBWGQ2kNuyE66wMO54nkUwHBCFLgPFxnR7tENGNOZAdz1E6Fz4sPbZAkjrd2RDIAIAhQGMwAoiR";
+const access_token = "EAAB9fIH7JVYBAOdQPVxrxrpEzr0FCjA5qy43GZCyjtOUgQWlFNBZCiZAn2CGnw9C6IZBO6zU3iZB5wCbyMkDko9Rzfw9clKFDe867pPcZCl7seBWGQ2kNuyE66wMO54nkUwHBCFLgPFxnR7tENGNOZAdz1E6Fz4sPbZAkjrd2RDIAIAhQGMwAoiR;"
 const apiaiApp = require('apiai')("cb9a11314db744ddb8813bef8496d059");
 app.set('port', (process.env.PORT || 5000))
 
@@ -230,6 +230,28 @@ function receivedPostback(event) {
   // button for Structured Messages. 
   var payload = event.postback.payload;
 
+  switch (payload) {
+    case 'generic':
+      sendGenericMessage(senderID);
+      break;
+
+    case 'menu':
+      sendMenu(senderID);
+      break;
+
+    // Leave View
+    case 'VIEW_LEAVE_FILED':
+      getLeaveFiled(senderID);
+      break;
+
+    // Leave Application
+    case 'LEAVE_APP_SICK_LEAVE' || 'LEAVE_APP_VACANT_LEAVE' || 'LEAVE_APP_EMERGENCY_LEAVE':
+      fileLeave(payload.substr(10));
+      break;
+    
+    default:
+      sendTextMessage(senderID, messageText);
+  }
   // console.log("Received postback for user %d and page %d with payload '%s' " + "at %d", senderID, recipientID, payload, timeOfPostback);
 
 
@@ -301,6 +323,10 @@ function getLeaveFiled(recipientId) {
   };
 
   callSendAPI(messageData);
+}
+
+function fileLeave(leavetype){
+  console.log("Filing", leavetype);
 }
 // Spin up the server
 app.listen(app.get('port'), function() {
