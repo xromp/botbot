@@ -85,7 +85,7 @@ function receivedMessage(event) {
         sendGenericMessage(senderID);
         break;
 
-      case 'generic':
+      case 'menu':
         sendMenu(senderID);
         break;
       default:
