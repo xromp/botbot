@@ -276,7 +276,7 @@ function getLeaveFiled(recipientId) {
           "elements": [
             {
               "title": "10-Mar-2017 Tue(REG)",
-              "subtitle": "Sick Leave"\
+              "subtitle": "Sick Leave"
             },
             {
               "title": "12-Mar-2017 Tue(REG)",
