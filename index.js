@@ -275,15 +275,15 @@ function getLeaveFiled(recipientId) {
           "top_element_style": "compact",
           "elements": [
             {
-              "title": "10-Mar-2017 Tue(REG)",
+              "title": "10-Mar-2017 Tue(For Approval)",
               "subtitle": "Sick Leave"
             },
             {
-              "title": "12-Mar-2017 Tue(REG)",
+              "title": "12-Mar-2017 Tue(Approved)",
               "subtitle": "Emergency Leave"
             },
             {
-              "title": "14-Mar-2017 Tue(REG)",
+              "title": "14-Mar-2017 Tue(Cancelled)",
               "subtitle": "Vacant Leave"
             }
           ],
