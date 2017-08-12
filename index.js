@@ -245,7 +245,7 @@ function receivedPostback(event) {
       break;
 
     // Leave Application
-    case 'LEAVE_APP_SICK_LEAVE' || 'LEAVE_APP_VACANT_LEAVE' || 'LEAVE_APP_EMERGENCY_LEAVE':
+    case 'LEAVE_APP_SL' || 'LEAVE_APP_VL' || 'LEAVE_APP_EL':
       fileLeave(payload.substr(10));
       break;
     
