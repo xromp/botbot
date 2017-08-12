@@ -107,18 +107,18 @@ function sendGenericMessage(recipientId) {
         payload: {
           template_type: "generic",
           elements: [{
-            title: "rift",
-            subtitle: "Next-generation virtual reality",
-            item_url: "https://www.oculus.com/en-us/rift/",               
+            title: "TimeAway Management",
+            subtitle: "Time Away Program Manager (Employee Benefits) to develop and manage employee Absence and Insurance programs.",
+            item_url: "https://www.oculus.com/en-us/rift/",
             image_url: "http://messengerdemo.parseapp.com/img/rift.png",
             buttons: [{
               type: "web_url",
-              url: "https://www.oculus.com/en-us/rift/",
-              title: "Open Web URL"
+              url: "https://www.facebook.com/",
+              title: "Login via Facebook"
             }, {
               type: "postback",
-              title: "Call Postback",
-              payload: "Payload for first bubble",
+              title: "Login via Gmail",
+              payload:"LOGIN_GMAIL"
             }],
           }, {
             title: "touch",
@@ -148,46 +148,8 @@ function sendMenu(recipientId) {
     recipient: {
       id: 1
     },
-    message: {
-      "persistent_menu":[
-          {
-            "locale":"default",
-            "composer_input_disabled":true,
-            "call_to_actions":[
-              {
-                "title":"My Account",
-                "type":"nested",
-                "call_to_actions":[
-                  {
-                    "title":"Pay Bill",
-                    "type":"postback",
-                    "payload":"PAYBILL_PAYLOAD"
-                  },
-                  {
-                    "title":"History",
-                    "type":"postback",
-                    "payload":"HISTORY_PAYLOAD"
-                  },
-                  {
-                    "title":"Contact Info",
-                    "type":"postback",
-                    "payload":"CONTACT_INFO_PAYLOAD"
-                  }
-                ]
-              },
-              {
-                "type":"web_url",
-                "title":"Latest News",
-                "url":"http://petershats.parseapp.com/hat-news",
-                "webview_height_ratio":"full"
-              }
-            ]
-          },
-          {
-            "locale":"zh_CN",
-            "composer_input_disabled":false
-          }
-      ]
+    message:{
+      
     }
   };
 
