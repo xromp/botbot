@@ -98,38 +98,76 @@ function receivedMessage(event) {
 
 function sendGenericMessage(recipientId) {
   var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "generic",
-          elements: [{
-            title: "TimeAway Management",
-            subtitle: "Time Away Program Manager (Employee Benefits) to develop and manage employee Absence and Insurance programs.",
-            item_url: "https://www.facebook.com/",
-            image_url: "http://messengerdemo.parseapp.com/img/rift.png",
-            buttons: [{
-              type: "web_url",
-              url: "https://www.facebook.com/",
-              title: "Login via Facebook"
-            }, {
-              type: "postback",
-              title: "Login via Gmail",
-              payload:"LOGIN_GMAIL"
-            }, {
-              type: "web_url",
-              url: "https://www.facebook.com/",
-              title: "Open Website",
-            }],
-          }]
+    "recipient":{
+      "id": recipientId
+    }, 
+    "message": {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "list",
+          "top_element_style": "compact",
+          "elements": [
+            {
+              "title": "Classic T-Shirt Collection",
+              "subtitle": "See all our colors",
+              "image_url": "https://peterssendreceiveapp.ngrok.io/img/collection.png",          
+              "buttons": [
+                {
+                  "title": "View",
+                  "type": "web_url",
+                  "url": "https://peterssendreceiveapp.ngrok.io/collection",
+                  "messenger_extensions": true,
+                  "webview_height_ratio": "tall",
+                  "fallback_url": "https://peterssendreceiveapp.ngrok.io/"            
+                }
+              ]
+            },
+            {
+              "title": "Classic White T-Shirt",
+              "subtitle": "See all our colors",
+              "default_action": {
+                "type": "web_url",
+                "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                "messenger_extensions": true,
+                "webview_height_ratio": "tall",
+                "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+              }
+            },
+            {
+              "title": "Classic Blue T-Shirt",
+              "image_url": "https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png",
+              "subtitle": "100% Cotton, 200% Comfortable",
+              "default_action": {
+                "type": "web_url",
+                "url": "https://peterssendreceiveapp.ngrok.io/view?item=101",
+                "messenger_extensions": true,
+                "webview_height_ratio": "tall",
+                "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+              },
+              "buttons": [
+                {
+                  "title": "Shop Now",
+                  "type": "web_url",
+                  "url": "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+                  "messenger_extensions": true,
+                  "webview_height_ratio": "tall",
+                  "fallback_url": "https://peterssendreceiveapp.ngrok.io/"            
+                }
+              ]        
+            }
+          ],
+           "buttons": [
+            {
+              "title": "View More",
+              "type": "postback",
+              "payload": "payload"            
+            }
+          ]  
         }
       }
-
     }
-  };  
+  };
 
   callSendAPI(messageData);
 }
@@ -257,6 +295,9 @@ function createEmplyee(person){
   }); 	
 }
 
+function getLeaveFiled() {
+
+}
 // Spin up the server
 app.listen(app.get('port'), function() {
 	console.log('running on port', app.get('port'))
