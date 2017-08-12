@@ -109,7 +109,7 @@ function sendGenericMessage(recipientId) {
           elements: [{
             title: "TimeAway Management",
             subtitle: "Time Away Program Manager (Employee Benefits) to develop and manage employee Absence and Insurance programs.",
-            item_url: "https://www.oculus.com/en-us/rift/",
+            item_url: "https://www.facebook.com/",
             image_url: "http://messengerdemo.parseapp.com/img/rift.png",
             buttons: [{
               type: "web_url",
@@ -119,6 +119,10 @@ function sendGenericMessage(recipientId) {
               type: "postback",
               title: "Login via Gmail",
               payload:"LOGIN_GMAIL"
+            }, {
+              type: "web_url",
+              url: "https://www.facebook.com/",
+              title: "Open Website",
             }],
           }, {
             title: "touch",
