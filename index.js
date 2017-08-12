@@ -146,7 +146,7 @@ function sendGenericMessage(recipientId) {
 function sendMenu(recipientId) {
   var messageData = {
     recipient: {
-      id: recipientId
+      id: 1
     },
     message: {
       "persistent_menu":[
@@ -189,7 +189,7 @@ function sendMenu(recipientId) {
           }
       ]
     }
-  };  
+  };
 
   callSendAPI(messageData);
 
