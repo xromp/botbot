@@ -275,19 +275,16 @@ function getLeaveFiled(recipientId) {
           "top_element_style": "compact",
           "elements": [
             {
-              "title": "Classic T-Shirt Collection",
-              "subtitle": "See all our colors",
-              "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhFrqVLncGOaI8Fqgf_eBg-FGqotAnD6LKZAkYyV47XwKNZn8_"
+              "title": "10-Mar-2017 Tue(REG)",
+              "subtitle": "Sick Leave"\
             },
             {
-              "title": "Classic T-Shirt Collection",
-              "subtitle": "See all our colors",
-              "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhFrqVLncGOaI8Fqgf_eBg-FGqotAnD6LKZAkYyV47XwKNZn8_"
+              "title": "12-Mar-2017 Tue(REG)",
+              "subtitle": "Emergency Leave"
             },
             {
-              "title": "Classic T-Shirt Collection",
-              "subtitle": "See all our colors",
-              "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhFrqVLncGOaI8Fqgf_eBg-FGqotAnD6LKZAkYyV47XwKNZn8_"
+              "title": "14-Mar-2017 Tue(REG)",
+              "subtitle": "Vacant Leave"
             }
           ],
            "buttons": [
