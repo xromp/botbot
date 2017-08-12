@@ -250,7 +250,8 @@ function receivedPostback(event) {
       break;
     
     default:
-      sendTextMessage(senderID, messageText);
+      console.log('--------------NO--------------', payload);
+    console.log(payload);
   }
   // console.log("Received postback for user %d and page %d with payload '%s' " + "at %d", senderID, recipientID, payload, timeOfPostback);
 
