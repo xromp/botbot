@@ -7,19 +7,7 @@ const http = require('http')
 const app = express()
 const access_token = "EAAB9fIH7JVYBAKjB9RpxOPFsKr02okbRwNsYt4cd0YNFosEOVdZB8fv1Op1EI8KZAaQZBR2OfqHryWZAVZAhy9rRFJvzmLJqhlw5KidspPsZBI3SjSI5n7kQdZC3MSURupvvjMpzyCxatMHTYaTVsHSzZCLp4wumzWiYko0eIy8FMQZDZD";
 const apiaiApp = require('apiai')("cb9a11314db744ddb8813bef8496d059");
-// const firebaseAdmin = require("firebase-admin");
-
-// var serviceAccount = require("path/to/serviceAccountKey.json");
-
-// admin.initializeApp({
-//   credential: firebaseAdmin.credential.cert(serviceAccount),
-//   databaseURL: "https://timeaway-ddb73.firebaseio.com"
-// });
-// var db = firebaseAdmin.database(); 
-// var ref = db.ref("employee");
-// ref.on("value", function(snapshot) {
-//   console.log(snapshot.val());
-// });
+const firebaseDomain = 'https://timeaway-ddb73.firebaseio.com/';
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -300,43 +288,69 @@ function createEmplyee(person){
 }
 
 function getLeaveFiled(recipientId) {
-  var messageData = {
-    "recipient":{
-      "id":recipientId
-    }, 
-    "message": {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "list",
-          "top_element_style": "compact",
-          "elements": [
-            {
-              "title": "10-Mar-2017 Tue(For Approval)",
-              "subtitle": "Sick Leave"
-            },
-            {
-              "title": "12-Mar-2017 Tue(Approved)",
-              "subtitle": "Emergency Leave"
-            },
-            {
-              "title": "14-Mar-2017 Tue(Canc)",
-              "subtitle": "Vacant Leave"
-            }
-          ],
-           "buttons": [
-            {
-              "title": "View More",
-              "type": "postback",
-              "payload": "payload"            
-            }
-          ]  
-        }
-      }
-    }
+  var formData = {
+  	name:"bryan",
+  	gmail:"bryan@google.com"
   };
 
-  callSendAPI(messageData);
+  request({
+    uri: firebaseDomain+'/leavesperemployee/1.json',
+    method: 'POST',
+    json: formData
+
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var leaveList = [];
+      for(i in body){
+        var leave = body[i];
+        leaveList.push({'title':leave.date,'subtitle':leave.leavetype});
+      }
+      console.log('-----------------leaveList----------',leaveList);
+      // var leaveList = [
+      //   {
+      //     "title": "10-Mar-2017 Tue(For Approval)",
+      //     "subtitle": "Sick Leave"
+      //   },
+      //   {
+      //     "title": "12-Mar-2017 Tue(Approved)",
+      //     "subtitle": "Emergency Leave"
+      //   },
+      //   {
+      //     "title": "14-Mar-2017 Tue(Cancelled)",
+      //     "subtitle": "Vacant Leave"
+      //   }
+      // ];
+      
+      var messageData = {
+        "recipient":{
+          "id":recipientId
+        }, 
+        "message": {
+          "attachment": {
+            "type": "template",
+            "payload": {
+              "template_type": "list",
+              "top_element_style": "compact",
+              "elements": leaveList,
+               "buttons": [
+                {
+                  "title": "View More",
+                  "type": "postback",
+                  "payload": "payload"            
+                }
+              ]  
+            }
+          }
+        }
+      };
+    
+      callSendAPI(messageData);
+    } else {
+      console.error("Unable to send message.");
+      console.error(response);
+      console.error(error);
+    }
+  }); 
 }
 
 function fileLeave(leavetype, senderId){
