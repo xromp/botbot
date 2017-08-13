@@ -6,7 +6,7 @@ const request = require('request')
 const http = require('http')
 const app = express()
 const access_token = "EAAB9fIH7JVYBAOdQPVxrxrpEzr0FCjA5qy43GZCyjtOUgQWlFNBZCiZAn2CGnw9C6IZBO6zU3iZB5wCbyMkDko9Rzfw9clKFDe867pPcZCl7seBWGQ2kNuyE66wMO54nkUwHBCFLgPFxnR7tENGNOZAdz1E6Fz4sPbZAkjrd2RDIAIAhQGMwAoiR"
-// const apiaiApp = require('apiai')("cb9a11314db744ddb8813bef8496d059");
+const apiaiApp = require('apiai')("cb9a11314db744ddb8813bef8496d059");
 // const firebaseAdmin = require("firebase-admin");
 
 // var serviceAccount = require("path/to/serviceAccountKey.json");
@@ -15,7 +15,7 @@ const access_token = "EAAB9fIH7JVYBAOdQPVxrxrpEzr0FCjA5qy43GZCyjtOUgQWlFNBZCiZAn
 //   credential: firebaseAdmin.credential.cert(serviceAccount),
 //   databaseURL: "https://timeaway-ddb73.firebaseio.com"
 // });
-// var db = firebaseAdmin.database();
+// var db = firebaseAdmin.database(); 
 // var ref = db.ref("employee");
 // ref.on("value", function(snapshot) {
 //   console.log(snapshot.val());
