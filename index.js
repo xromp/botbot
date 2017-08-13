@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const http = require('http')
 const app = express()
-const access_token = "EAAB9fIH7JVYBAOdQPVxrxrpEzr0FCjA5qy43GZCyjtOUgQWlFNBZCiZAn2CGnw9C6IZBO6zU3iZB5wCbyMkDko9Rzfw9clKFDe867pPcZCl7seBWGQ2kNuyE66wMO54nkUwHBCFLgPFxnR7tENGNOZAdz1E6Fz4sPbZAkjrd2RDIAIAhQGMwAoiR"
+const access_token = "EAAB9fIH7JVYBAKjB9RpxOPFsKr02okbRwNsYt4cd0YNFosEOVdZB8fv1Op1EI8KZAaQZBR2OfqHryWZAVZAhy9rRFJvzmLJqhlw5KidspPsZBI3SjSI5n7kQdZC3MSURupvvjMpzyCxatMHTYaTVsHSzZCLp4wumzWiYko0eIy8FMQZDZD";
 const apiaiApp = require('apiai')("cb9a11314db744ddb8813bef8496d059");
 // const firebaseAdmin = require("firebase-admin");
 
@@ -75,7 +75,7 @@ app.post('/webhook', function (req, res) {
     res.sendStatus(200);
   }
 });
-  
+
 function receivedMessage(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
@@ -260,7 +260,7 @@ function receivedPostback(event) {
 
     // Leave Application
     case 'LEAVE_APP_SL' || 'LEAVE_APP_VL' || 'LEAVE_APP_EL':
-      fileLeave(payload.substr(10));
+      fileLeave(payload.substr(10), senderID);
       break;
     
     default:
@@ -339,7 +339,7 @@ function getLeaveFiled(recipientId) {
   callSendAPI(messageData);
 }
 
-function fileLeave(leavetype){
+function fileLeave(leavetype, senderId){
   console.log("Filing", leavetype);
 }
 // Spin up the server
