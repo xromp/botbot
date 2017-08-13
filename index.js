@@ -301,7 +301,7 @@ function getLeaveFiled(recipientId) {
   }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var leaveList = [];
-      for(i in body){
+      for(var i in body){
         var leave = body[i];
         leaveList.push({'title':leave.date,'subtitle':leave.leavetype});
       }
