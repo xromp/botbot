@@ -43,7 +43,7 @@ app.post('/webhook', function (req, res) {
       var timeOfEvent = entry.time;
 
       // Iterate over each messaging event
-      console.log(entry.messaging);
+      // console.log(entry.messaging);
       entry.messaging.forEach(function(event) {
         if (event.message) {
           receivedMessage(event);
@@ -223,7 +223,7 @@ function callSendAPI(messageData) {
   }); 
 }
 function receivedPostback(event) {
-  console.log(event.postback.payload);
+  // console.log(event.postback.payload);
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
@@ -295,7 +295,7 @@ function getLeaveFiled(recipientId) {
 
   request({
     uri: firebaseDomain+'/leavesperemployee/1.json',
-    method: 'POST',
+    method: 'GET',
     json: formData
 
   }, function (error, response, body) {
@@ -354,9 +354,9 @@ function getLeaveFiled(recipientId) {
 }
 
 function fileLeave(leavetype, senderId){
-  console.log("Filing", leavetype);
+  // console.log("Filing", leavetype);
 }
 // Spin up the server
 app.listen(app.get('port'), function() {
-	console.log('running on port', app.get('port'))
+	// console.log('running on port', app.get('port'))
 })
