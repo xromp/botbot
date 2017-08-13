@@ -305,8 +305,8 @@ function getLeaveFiled(recipientId) {
       var leaveList = [];
       for(var i in body){
         var leave = body[i];
-        var leaveDate = new Date(leave.date);
-        var title = leaveDate +" "+weekDays[leaveDate.getDay()]+" ("+leave.status+")";
+        var leaveDate = new Date(leave.date);//leave.date
+        var title = leaveDate.toDateString() +" "+weekDays[leaveDate.getDay()]+" ("+leave.status+")";
         leaveList.push({'title': title,'subtitle':leave.leavetype});
       }
       console.log('-----------------leaveList----------',leaveList);
@@ -347,8 +347,8 @@ function getLeaveFiled(recipientId) {
           }
         }
       };
-      console.log('-----message----',messageData);
-      // callSendAPI(messageData);
+      console.log('-----message----',messageData)
+      callSendAPI(messageData);
     } else {
       console.error("Unable to send message.");
       console.error(response);
