@@ -9,6 +9,8 @@ const access_token = "EAAB9fIH7JVYBAKjB9RpxOPFsKr02okbRwNsYt4cd0YNFosEOVdZB8fv1O
 const apiaiApp = require('apiai')("cb9a11314db744ddb8813bef8496d059");
 const firebaseDomain = 'https://timeaway-ddb73.firebaseio.com/';
 
+const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
 app.set('port', (process.env.PORT || 5000))
 
 // Process application/x-www-form-urlencoded
@@ -303,7 +305,9 @@ function getLeaveFiled(recipientId) {
       var leaveList = [];
       for(var i in body){
         var leave = body[i];
-        leaveList.push({'title':leave.date,'subtitle':leave.leavetype});
+        var leaveDate = new Date(leave.date);
+        var title = leaveDate +" "+weekDays[leaveDate.getDay()]+" ("+leave.status+")";
+        leaveList.push({'title': title,'subtitle':leave.leavetype});
       }
       console.log('-----------------leaveList----------',leaveList);
       // var leaveList = [
