@@ -344,7 +344,7 @@ function getLeaveFiled(recipientId) {
         }
       };
     
-      callSendAPI(messageData);
+      // callSendAPI(messageData);
     } else {
       console.error("Unable to send message.");
       console.error(response);
